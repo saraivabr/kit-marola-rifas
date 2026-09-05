@@ -21,6 +21,7 @@ class Payment extends Model
         'date_of_expiration',
         'transaction_amount',
         'qr_code',
+        'qr_code_img',
         'date_approved',
         'order_id',
     ];

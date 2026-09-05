@@ -92,9 +92,30 @@ class OrderController extends Controller
         $order->quantity = $quantity;
         $order->numbers_reserved = [];
         $order->status = Order::STATUS_RESERVED;
-        $order->expire_at = now()->addMinutes(config('payment.order_expired'));
+        $order->expire_at = now()->addMinutes(config('payment.order_expired', 60));
         $order->saveOrFail();
 
-        return Inertia::location(route('orders.show', [$order->id]));
+        // Gera cobrança Pix imediatamente e leva o cliente direto para o pagamento sem passos intermediários
+        try {
+            $paymentGateway = app(\App\Services\WooviService::class);
+            $response = $paymentGateway->generatePix($order, $rifa);
+
+            $payment = new \App\Models\Payment;
+            $payment->id = $response->id;
+            $payment->ticket_url = $response->ticket_url;
+            $payment->payment_code = $response->payment_method_id;
+            $payment->date_of_expiration = Carbon::parse($response->date_of_expiration)->timezone(config('app.timezone', 'America/Sao_Paulo'));
+            $payment->transaction_amount = $response->transaction_amount;
+            $payment->qr_code = $response->qr_code;
+            $payment->qr_code_img = $response->qr_code_img;
+            $payment->order_id = $order->id;
+            $payment->save();
+
+            return Inertia::location(route('payment.show', ['payment' => $payment->id]));
+        } catch (\Throwable $e) {
+            \Illuminate\Support\Facades\Log::warning('Woovi: Fallback para resumo do pedido: ' . $e->getMessage());
+            return Inertia::location(route('orders.show', [$order->id]));
+        }
     }
 }
+

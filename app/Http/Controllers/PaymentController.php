@@ -60,6 +60,7 @@ class PaymentController extends Controller
             $payment->date_of_expiration = Carbon::parse($response->date_of_expiration)->timezone(config('app.timezone'));
             $payment->transaction_amount = $response->transaction_amount;
             $payment->qr_code = $response->qr_code;
+            $payment->qr_code_img = $response->qr_code_img;
             $payment->order_id = $order->id;
             $payment->save();
 
@@ -79,22 +80,41 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
+        $payment->loadMissing(['order.rifa']);
+
         if (empty($payment->qr_code_img)) {
-            $qrcode = QrCode::encoding('UTF-8')->format('svg')->size(300)->generate($payment->qr_code);
-            $payment->qr_code_img = 'data:image/svg+xml;base64,'.base64_encode($qrcode);
+            try {
+                $qrcode = QrCode::encoding('UTF-8')->format('svg')->size(300)->generate($payment->qr_code);
+                $payment->qr_code_img = 'data:image/svg+xml;base64,'.base64_encode($qrcode);
+            } catch (\Throwable $e) {
+                Log::warning('Falha ao gerar QR Code SVG local: ' . $e->getMessage());
+            }
         }
-        $payment->date_of_expiration = Carbon::parse($payment->date_of_expiration)->timezone('America/Sao_Paulo');
+        $payment->date_of_expiration = Carbon::parse($payment->date_of_expiration)->timezone(config('app.timezone', 'America/Sao_Paulo'));
 
         return inertia('Payment/PsrShow', [
-            'payment' => $payment->only([
-                'id',
-                'qr_code',
-                'qr_code_img',
-                'ticket_url',
-                'transaction_amount',
-                'date_of_expiration',
-                'date_approved',
-            ]),
+            'payment' => [
+                'id' => $payment->id,
+                'qr_code' => $payment->qr_code,
+                'qr_code_img' => $payment->qr_code_img,
+                'ticket_url' => $payment->ticket_url,
+                'transaction_amount' => $payment->transaction_amount,
+                'date_of_expiration' => $payment->date_of_expiration,
+                'date_approved' => $payment->date_approved,
+            ],
+            'order' => $payment->order ? [
+                'id' => $payment->order->id,
+                'quantity' => $payment->order->quantity,
+                'customer_fullname' => $payment->order->customer_fullname,
+                'customer_telephone' => $payment->order->customer_telephone,
+                'rifa' => $payment->order->rifa ? [
+                    'id' => $payment->order->rifa->id,
+                    'title' => $payment->order->rifa->title,
+                    'price' => $payment->order->rifa->price,
+                    'image' => $payment->order->rifa->image,
+                    'slug' => $payment->order->rifa->slug,
+                ] : null,
+            ] : null,
         ]);
     }
 

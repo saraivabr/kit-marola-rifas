@@ -16,6 +16,19 @@
       date_of_expiration: string;
       date_approved: string;
     };
+    order?: {
+      id: number;
+      quantity: number;
+      customer_fullname: string;
+      customer_telephone: string;
+      rifa?: {
+        id: number;
+        title: string;
+        price: number;
+        image: string;
+        slug: string;
+      } | null;
+    } | null;
   }>();
 
   onMounted(checkPaymentStatus);
