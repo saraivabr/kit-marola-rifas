@@ -7,6 +7,7 @@
   import PsrCountdown from '@Components/PsrCountdown.vue';
   import PsrButton from '@Components/PsrButton.vue';
   import PsrDialog from '@Components/PsrDialog.vue';
+  import PsrThemeToggle from '@Components/PsrThemeToggle.vue';
 
   const props = defineProps<{
     order: Order & { transaction_amount: number };
@@ -42,119 +43,113 @@
 </script>
 
 <template>
-  <div class="container max-w-[558px] space-y-4 pt-10 pb-32 px-4">
-    <div class="mb-4" data-testid="heading">
-      <h1 class="text-2xl font-extrabold font-[Raleway] leading-none">Resumo do Pedido</h1>
-      <PsrBadge v-if="!checkIsPaid && order.expire_at" type="warning" data-testid="expire">
-        Expira em: {{ expireAt }}
-      </PsrBadge>
+  <div class="min-h-screen bg-astryx-body text-astryx-text-primary transition-colors duration-200">
+    <div class="container max-w-[558px] space-y-4 pt-6 pb-32 px-4">
+      <div class="flex items-center justify-between">
+        <a :href="typeof route === 'function' ? route('home') : '/'" class="text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline">
+          ← Voltar para as Rifas
+        </a>
+        <PsrThemeToggle />
+      </div>
+
+      <div class="mb-4" data-testid="heading">
+        <h1 class="text-2xl font-extrabold font-[Raleway] text-astryx-text-primary leading-none">Resumo do Pedido</h1>
+        <PsrBadge v-if="!checkIsPaid && order.expire_at" type="warning" class="mt-2" data-testid="expire">
+          Expira em: {{ expireAt }}
+        </PsrBadge>
+      </div>
+
+      <PsrDialog v-if="hasError" :button-confirm="false" @dismiss="hasError = false">
+        Não foi possível finalizar o pedido. Entre em contato com o administrador do site.
+      </PsrDialog>
+
+      <PsrCard>
+        <div class="!mt-0 space-y-3" role="table">
+          <div role="row">
+            <p role="cell">
+              <span role="cell" class="text-astryx-text-secondary">Rifa: </span>
+              <b role="cell" class="text-astryx-text-primary">{{ rifa.title }}</b>
+            </p>
+          </div>
+          <hr class="border-astryx-border-subtle" />
+          <div role="row">
+            <p role="cell">
+              <span role="cell" class="text-astryx-text-secondary">Nome: </span>
+              <b role="cell" class="text-astryx-text-primary">{{ order.customer_fullname || order.customer_email }}</b>
+            </p>
+          </div>
+          <hr class="border-astryx-border-subtle" />
+          <div role="row">
+            <p role="cell">
+              <span role="cell" class="text-astryx-text-secondary">Telefone: </span>
+              <b role="cell" class="text-astryx-text-primary">{{ telephone }}</b>
+            </p>
+          </div>
+          <hr class="border-astryx-border-subtle" />
+          <div v-if="order.customer_instagram" role="row">
+            <p role="cell">
+              <span role="cell" class="text-astryx-text-secondary">Instagram: </span>
+              <b role="cell" class="text-amber-500">{{ order.customer_instagram.startsWith('@') ? order.customer_instagram : `@${order.customer_instagram}` }}</b>
+            </p>
+          </div>
+          <hr v-if="order.customer_instagram" class="border-astryx-border-subtle" />
+          <div role="row">
+            <p role="cell">
+              <span role="cell" class="text-astryx-text-secondary">Email: </span>
+              <b role="cell" class="text-astryx-text-primary">{{ order.customer_email }}</b>
+            </p>
+          </div>
+          <hr class="border-astryx-border-subtle" />
+          <div role="row">
+            <p role="cell">
+              <span role="cell" class="text-astryx-text-secondary">Quantidade de cotas: </span>
+              <b role="cell" class="text-astryx-text-primary">{{ order.quantity || (order.numbers_reserved ? order.numbers_reserved.length : 1) }}</b>
+            </p>
+          </div>
+          <hr class="border-astryx-border-subtle" />
+          <div role="row">
+            <p role="cell">
+              <span role="cell" class="text-astryx-text-secondary">Valor total: </span>
+              <b role="cell" class="text-amber-600 dark:text-amber-400 font-black text-xl">{{ transactionAmount }}</b>
+            </p>
+          </div>
+        </div>
+
+        <div class="!mt-6 p-4 rounded-astryx-element bg-amber-500/10 border border-amber-500/30 text-center">
+          <p class="font-bold text-amber-600 dark:text-amber-300 text-sm flex items-center justify-center gap-1.5 mb-1">
+            <span>🔒</span> Números gerados após o pagamento
+          </p>
+          <p class="text-xs text-astryx-text-secondary leading-relaxed">
+            Seus números da sorte serão gerados e revelados de forma 100% transparente logo após a confirmação do Pix, e enviados também no seu WhatsApp.
+          </p>
+        </div>
+      </PsrCard>
     </div>
 
-    <PsrDialog v-if="hasError" :button-confirm="false" @dismiss="hasError = false">
-      Não foi possível finalizar o pedido. Entre em contato com o administrador do site.
-    </PsrDialog>
+    <div class="fixed bottom-0 left-0 w-screen !m-0 p-4 space-y-2 bg-astryx-card/95 border-t border-astryx-border-subtle backdrop-blur-md text-center z-40 transition-colors">
+      <p class="text-xs text-center text-astryx-text-secondary">
+        <span>Pague em até: </span>
+        <PsrCountdown
+          v-if="!checkIsPaid"
+          class="inline-block text-amber-600 dark:text-amber-400 font-bold"
+          data-testid="countdown"
+          :time="order.expire_at"
+          @end="countdownEnd"
+        />
+      </p>
 
-    <PsrCard>
-      <div class="!mt-0 space-y-3" role="table">
-        <div role="row">
-          <p role="cell">
-            <span role="cell">Rifa: </span>
-            <b role="cell">{{ rifa.title }}</b>
-          </p>
-        </div>
-        <hr />
-        <div role="row">
-          <p role="cell">
-            <span role="cell">Nome: </span>
-            <b role="cell">{{ order.customer_fullname || order.customer_email }}</b>
-          </p>
-        </div>
-        <hr />
-        <div role="row">
-          <p role="cell">
-            <span role="cell">Telefone: </span>
-            <b role="cell">{{ telephone }}</b>
-          </p>
-        </div>
-        <hr />
-        <div v-if="order.customer_instagram" role="row">
-          <p role="cell">
-            <span role="cell">Instagram: </span>
-            <b role="cell" class="text-amber-500">{{ order.customer_instagram.startsWith('@') ? order.customer_instagram : `@${order.customer_instagram}` }}</b>
-          </p>
-        </div>
-        <hr v-if="order.customer_instagram" />
-        <div role="row">
-          <p role="cell">
-            <span role="cell">Email: </span>
-            <b role="cell">{{ order.customer_email }}</b>
-          </p>
-        </div>
-        <hr />
-        <div role="row">
-          <p role="cell">
-            <span role="cell">Quantidade de cotas: </span>
-            <b role="cell">{{ order.quantity || (order.numbers_reserved ? order.numbers_reserved.length : 1) }}</b>
-          </p>
-        </div>
-        <hr />
-        <div role="row">
-          <p role="cell">
-            <span role="cell">Valor total: </span>
-            <b role="cell" class="text-amber-400 font-black text-xl">{{ transactionAmount }}</b>
-          </p>
-        </div>
-      </div>
-
-      <div class="!mt-6 p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-center">
-        <p class="font-bold text-amber-300 text-sm flex items-center justify-center gap-1.5 mb-1">
-          <span>🔒</span> Números gerados após o pagamento
-        </p>
-        <p class="text-xs text-gray-300 leading-relaxed">
-          Seus números da sorte serão gerados e revelados de forma 100% transparente logo após a confirmação do Pix, e enviados também no seu WhatsApp.
-        </p>
-      </div>
-    </PsrCard>
-  </div>
-
-  <div class="fixed bottom-0 left-0 w-screen !m-0 p-4 space-y-2 bg-slate-950/95 border-t border-slate-800 backdrop-blur-md text-center z-40">
-    <p class="text-xs text-center text-gray-300">
-      <span>Pague em até: </span>
-      <PsrCountdown
+      <PsrButton
         v-if="!checkIsPaid"
-        class="inline-block text-amber-400 font-bold"
-        data-testid="countdown"
-        :time="order.expire_at"
-        @end="countdownEnd"
-      />
-    </p>
-
-    <PsrButton
-      v-if="!checkIsPaid"
-      class="w-full max-w-[558px] !bg-gradient-to-r !from-amber-500 !via-amber-400 !to-amber-500 hover:!from-amber-400 hover:!to-amber-300 !text-slate-950 !font-black !py-3.5 !rounded-2xl !shadow-lg active:scale-95 text-base uppercase tracking-wider"
-      data-testid="button-payment"
-      :disabled="expired || !!form.processing"
-      @click="confirmOrder"
-    >
-      <span v-if="form.processing" class="text-slate-950">Aguarde</span>
-      <span v-else class="text-slate-950 flex items-center justify-center gap-2">
-        {{ expired ? 'Expirado' : 'Avançar para o Pix 👉' }}
-      </span>
-    </PsrButton>
+        class="w-full max-w-[558px] !bg-gradient-to-r !from-amber-500 !via-amber-400 !to-amber-500 hover:!from-amber-400 hover:!to-amber-300 !text-slate-950 !font-black !py-3.5 !rounded-2xl !shadow-lg active:scale-95 text-base uppercase tracking-wider cursor-pointer"
+        data-testid="button-payment"
+        :disabled="expired || !!form.processing"
+        @click="confirmOrder"
+      >
+        <span v-if="form.processing" class="text-slate-950">Aguarde</span>
+        <span v-else class="text-slate-950 flex items-center justify-center gap-2">
+          <span>❖</span> Pagar com Pix Agora
+        </span>
+      </PsrButton>
+    </div>
   </div>
 </template>
-
-<style scoped>
-  b {
-    @apply font-semibold;
-  }
-
-  .fixed {
-    box-shadow:
-      rgba(0, 0, 0, 0.25) 0px 54px 55px,
-      rgba(0, 0, 0, 0.12) 0px -12px 30px,
-      rgba(0, 0, 0, 0.12) 0px 4px 6px,
-      rgba(0, 0, 0, 0.17) 0px 12px 13px,
-      rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  }
-</style>

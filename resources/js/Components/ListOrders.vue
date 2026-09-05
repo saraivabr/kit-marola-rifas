@@ -15,12 +15,6 @@
     unknown: 'Desconhecido',
   });
 
-  const badgeClasses = readonly({
-    expired: 'danger',
-    paid: 'success',
-    reserved: 'warning',
-  });
-
   const allOrders = computed(() =>
     props.orders.map((order) => ({
       ...order,
@@ -34,45 +28,41 @@
     <div
       v-for="order in allOrders"
       :key="`number-${order.id}`"
-      class="bg-white gap-2 p-4 rounded-lg shadow space-y-3 text-start hover:bg-gray-50"
+      class="bg-astryx-card border border-astryx-border-subtle gap-2 p-4 rounded-astryx-element shadow-astryx-low space-y-3 text-start hover:bg-astryx-card-hover transition-colors"
     >
-      <span :class="order.status"> Situação: {{ statuses[order.status] ?? statuses.unknown }} </span>
+      <div class="flex items-center justify-between text-xs">
+        <span class="text-astryx-text-secondary font-medium">Pedido #{{ order.id }}</span>
+        <PsrBadge :type="order.status === 'paid' ? 'success' : (order.status === 'reserved' ? 'warning' : 'danger')">
+          {{ statuses[order.status] ?? statuses.unknown }}
+        </PsrBadge>
+      </div>
 
       <div v-if="order.status === 'paid' && order.numbers_reserved && order.numbers_reserved.length" class="flex flex-wrap justify-start gap-2">
         <PsrBadge
           v-for="(number, idx) in order.numbers_reserved"
           :key="`number-${idx}`"
-          :style="order.status"
           type="success"
         >
           {{ number }}
         </PsrBadge>
       </div>
-      <div v-else-if="order.status === 'reserved'" class="text-xs text-amber-700 bg-amber-50 border border-amber-200 p-2.5 rounded-lg">
+      <div v-else-if="order.status === 'reserved'" class="text-xs text-amber-700 dark:text-amber-300 bg-amber-500/10 border border-amber-500/30 p-2.5 rounded-lg">
         🔒 <b>Aguardando pagamento Pix</b>. Seus números da sorte serão gerados e exibidos aqui assim que o Pix for aprovado.
       </div>
 
-      <p v-if="order.status === 'reserved' && order.expire_at" class="text-xs">
+      <p v-if="order.status === 'reserved' && order.expire_at" class="text-xs text-astryx-text-tertiary">
         <span>Expira em: </span>
         <PsrCountdown :time="order.expire_at" />
       </p>
 
-      <p v-if="order.status === 'reserved'" class="text-center">
+      <p v-if="order.status === 'reserved'" class="text-center pt-1">
         <a
-          class="bg-[#1e7dd4] uppercase px-3 py-2 rounded text-white text-sm w-full"
-          data-test="pay"
           :href="order.paymentLink"
+          class="inline-flex items-center justify-center gap-1.5 w-full py-2.5 px-4 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-xs transition-colors shadow-sm"
         >
-          Pagar
+          <span>❖</span> Pagar Pix Agora
         </a>
       </p>
     </div>
   </div>
 </template>
-
-<style scoped>
-  span.badge.danger {
-    text-decoration: line-through;
-    text-decoration-thickness: 8px;
-  }
-</style>

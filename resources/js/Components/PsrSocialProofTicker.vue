@@ -32,7 +32,6 @@ function showNext() {
 }
 
 onMounted(() => {
-  // Primeira notificação após 3 segundos
   setTimeout(() => {
     showNext();
     timer = setInterval(showNext, 9000);
@@ -56,40 +55,27 @@ onUnmounted(() => {
   >
     <div
       v-if="visible"
-      class="fixed bottom-5 left-4 sm:left-6 z-50 max-w-[340px] bg-slate-900/95 border border-amber-500/40 rounded-2xl p-3.5 shadow-2xl shadow-black/80 backdrop-blur-md flex items-center gap-3.5"
+      class="fixed bottom-5 left-4 sm:left-6 z-50 max-w-[340px] bg-astryx-card/95 border border-amber-500/40 rounded-astryx-container p-3.5 shadow-astryx-high backdrop-blur-md flex items-center gap-3.5 transition-colors"
     >
-      <div class="relative flex-shrink-0">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center text-slate-950 font-black text-sm shadow-md">
-          🎟️
-        </div>
-        <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-slate-900 rounded-full animate-ping"></span>
-        <span class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-500 border-2 border-slate-900 rounded-full"></span>
+      <div class="w-9 h-9 rounded-full bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-black text-sm flex-shrink-0">
+        ✓
       </div>
-
-      <div class="flex-1 min-w-0">
-        <div class="flex items-center justify-between gap-1">
-          <p class="text-xs font-bold text-white truncate">
+      <div class="min-w-0 flex-1">
+        <div class="flex items-center justify-between gap-1 mb-0.5">
+          <p class="text-xs font-black text-astryx-text-primary truncate">
             {{ notifications[currentIndex].name }}
           </p>
-          <span class="text-[10px] text-amber-400/80 font-medium">
+          <span class="text-[10px] text-astryx-text-tertiary whitespace-nowrap">
             {{ notifications[currentIndex].timeAgo }}
           </span>
         </div>
-        <p class="text-[11px] text-gray-300 truncate mt-0.5">
-          Comprou <strong class="text-amber-400 font-bold">{{ notifications[currentIndex].qty }} cotas</strong> de
+        <p class="text-[11px] text-astryx-text-secondary truncate">
+          Comprou <strong class="text-amber-600 dark:text-amber-400 font-black">{{ notifications[currentIndex].qty }} cotas</strong> de {{ notifications[currentIndex].item }}
         </p>
-        <p class="text-[11px] text-gray-400 font-medium truncate">
-          {{ notifications[currentIndex].item }}
-        </p>
+        <span class="text-[9px] text-astryx-text-tertiary block">
+          📍 {{ notifications[currentIndex].city }}
+        </span>
       </div>
-
-      <button
-        type="button"
-        class="text-gray-500 hover:text-gray-300 text-xs p-1"
-        @click="visible = false"
-      >
-        ✕
-      </button>
     </div>
   </Transition>
 </template>

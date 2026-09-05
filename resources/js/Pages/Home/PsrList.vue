@@ -39,7 +39,7 @@
             </span>
             <span class="text-xs text-astryx-text-tertiary font-medium">100% no WhatsApp</span>
           </div>
-          <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight flex items-center gap-2 font-[Raleway]">
+          <h2 class="text-2xl sm:text-3xl font-black text-astryx-text-primary tracking-tight flex items-center gap-2 font-[Raleway]">
             🔥 Rifas em Andamento
           </h2>
           <p class="text-xs sm:text-sm text-astryx-text-secondary mt-1">
@@ -65,68 +65,68 @@
         <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"></div>
 
         <div class="text-center max-w-xl mx-auto mb-8">
-          <span class="text-xs font-bold text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
+          <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-widest bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">
             🏆 Ganhadores Satisfeitos
           </span>
-          <h3 class="text-xl sm:text-2xl font-black text-white mt-3 font-[Raleway]">
+          <h3 class="text-xl sm:text-2xl font-black text-astryx-text-primary mt-3 font-[Raleway]">
             Quem participa, aprova e recebe!
           </h3>
-          <p class="text-xs sm:text-sm text-gray-400 mt-1">
+          <p class="text-xs sm:text-sm text-astryx-text-secondary mt-1">
             Confira quem já levou os kits mais cobiçados da tabacaria para casa.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-md">
-            <div class="flex items-center gap-1 text-amber-400 text-sm mb-2">
+          <div class="bg-astryx-surface border border-astryx-border-subtle rounded-astryx-container p-5 shadow-astryx-low">
+            <div class="flex items-center gap-1 text-amber-500 text-sm mb-2">
               ★★★★★
             </div>
-            <p class="text-xs text-gray-300 italic mb-4">
+            <p class="text-xs text-astryx-text-secondary italic mb-4">
               "Comprei 5 cotas despretensioso e levei o Boné da RAW e o kit case! O Pix confirmou na hora e os números chegaram no meu zap. Veio super bem embalado!"
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400 font-bold text-xs">
+              <div class="w-9 h-9 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-600 dark:text-amber-400 font-bold text-xs">
                 RS
               </div>
               <div>
-                <p class="text-xs font-bold text-white">Rodrigo Silva</p>
-                <p class="text-[11px] text-gray-500">São Paulo, SP • Ganhador Kit RAW</p>
+                <p class="text-xs font-bold text-astryx-text-primary">Rodrigo Silva</p>
+                <p class="text-[11px] text-astryx-text-tertiary">São Paulo, SP • Ganhador Kit RAW</p>
               </div>
             </div>
           </div>
 
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-md">
-            <div class="flex items-center gap-1 text-amber-400 text-sm mb-2">
+          <div class="bg-astryx-surface border border-astryx-border-subtle rounded-astryx-container p-5 shadow-astryx-low">
+            <div class="flex items-center gap-1 text-amber-500 text-sm mb-2">
               ★★★★★
             </div>
-            <p class="text-xs text-gray-300 italic mb-4">
+            <p class="text-xs text-astryx-text-secondary italic mb-4">
               "Sistema muito rápido! O sorteio foi transmitido ao vivo e o envio foi feito no mesmo dia via Sedex com rastreio. 100% de confiança."
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400 font-bold text-xs">
+              <div class="w-9 h-9 rounded-full bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-600 dark:text-emerald-400 font-bold text-xs">
                 ML
               </div>
               <div>
-                <p class="text-xs font-bold text-white">Murilo Lima</p>
-                <p class="text-[11px] text-gray-500">Curitiba, PR • Ganhador Narguilé</p>
+                <p class="text-xs font-bold text-astryx-text-primary">Murilo Lima</p>
+                <p class="text-[11px] text-astryx-text-tertiary">Curitiba, PR • Ganhador Narguilé</p>
               </div>
             </div>
           </div>
 
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-md">
-            <div class="flex items-center gap-1 text-amber-400 text-sm mb-2">
+          <div class="bg-astryx-surface border border-astryx-border-subtle rounded-astryx-container p-5 shadow-astryx-low">
+            <div class="flex items-center gap-1 text-amber-500 text-sm mb-2">
               ★★★★★
             </div>
-            <p class="text-xs text-gray-300 italic mb-4">
+            <p class="text-xs text-astryx-text-secondary italic mb-4">
               "Gastei menos de 15 reais e ganhei o Pod Vaporesso com os juices importados. O atendimento no WhatsApp foi nota 10!"
             </p>
             <div class="flex items-center gap-3">
-              <div class="w-9 h-9 rounded-full bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-400 font-bold text-xs">
+              <div class="w-9 h-9 rounded-full bg-purple-500/20 border border-purple-500/40 flex items-center justify-center text-purple-600 dark:text-purple-400 font-bold text-xs">
                 TC
               </div>
               <div>
-                <p class="text-xs font-bold text-white">Thiago Castro</p>
-                <p class="text-[11px] text-gray-500">Belo Horizonte, MG • Ganhador Vape</p>
+                <p class="text-xs font-bold text-astryx-text-primary">Thiago Castro</p>
+                <p class="text-[11px] text-astryx-text-tertiary">Belo Horizonte, MG • Ganhador Vape</p>
               </div>
             </div>
           </div>

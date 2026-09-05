@@ -2,6 +2,7 @@
   import { ref } from 'vue';
   import HeaderMenu from './HeaderMenu.vue';
   import PsrLogo from './PsrLogo.vue';
+  import PsrThemeToggle from './PsrThemeToggle.vue';
   import AgeVerificationModal from './AgeVerificationModal.vue';
 
   const navSideOpen = ref(false);
@@ -140,9 +141,14 @@
           </svg>
         </button>
 
-        <a :href="route('home')" class="flex font-medium items-center text-gray-900 sm:m-0">
+        <a :href="route('home')" class="flex font-medium items-center text-astryx-text-primary sm:m-0">
           <PsrLogo />
         </a>
+
+        <!-- Botão de Tema no Header para Acesso Imediato -->
+        <div class="flex items-center gap-2 md:hidden">
+          <PsrThemeToggle />
+        </div>
       </div>
 
       <HeaderMenu v-model:active="navSideOpen" />

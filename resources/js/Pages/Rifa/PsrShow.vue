@@ -66,7 +66,7 @@
         </div>
       </div>
 
-      <h1 class="text-2xl sm:text-4xl font-black font-[Raleway] leading-tight text-white tracking-tight">
+      <h1 class="text-2xl sm:text-4xl font-black font-[Raleway] leading-tight text-astryx-text-primary tracking-tight">
         {{ rifa.title }}
       </h1>
       
@@ -74,13 +74,13 @@
       <div class="bg-astryx-card border border-astryx-border-subtle rounded-astryx-card p-5 shadow-astryx-med">
         <div class="flex justify-between items-center text-sm font-semibold mb-2.5">
           <span class="text-astryx-text-primary flex items-center gap-2 font-bold">
-            <span class="text-amber-400 text-lg animate-pulse">🔥</span> Progresso das Cotas Vendidas
+            <span class="text-amber-500 text-lg animate-pulse">🔥</span> Progresso das Cotas Vendidas
           </span>
-          <span class="text-amber-400 font-black text-base bg-amber-500/10 border border-amber-500/30 px-3 py-0.5 rounded-full">
+          <span class="text-amber-600 dark:text-amber-400 font-black text-base bg-amber-500/10 border border-amber-500/30 px-3 py-0.5 rounded-full">
             {{ progress }}% Vendido
           </span>
         </div>
-        <div class="w-full bg-slate-950 rounded-full h-3.5 overflow-hidden border border-astryx-border-subtle p-[2px]">
+        <div class="w-full bg-astryx-muted rounded-full h-3.5 overflow-hidden border border-astryx-border-subtle p-[2px]">
           <div
             class="bg-gradient-to-r from-amber-500 via-amber-400 to-yellow-300 h-full rounded-full transition-all duration-700 ease-out shadow-sm"
             :style="{ width: `${Math.min(100, Math.max(0, progress))}%` }"

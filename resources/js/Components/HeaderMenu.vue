@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import PsrLogo from './PsrLogo.vue';
+  import PsrThemeToggle from './PsrThemeToggle.vue';
 
   defineEmits<{
     (event: 'update:active', value: boolean): void;
@@ -18,9 +19,13 @@
       <a :href="route('testimonials.list')" class="menu-item">⭐ Depoimentos</a>
       <a :href="route('contact')" class="menu-item">💬 Suporte / Contato</a>
 
+      <div class="p-3 md:p-0 flex items-center gap-2">
+        <PsrThemeToggle />
+      </div>
+
       <button
         type="button"
-        class="p-4 border-b-2 border-b-slate-100 text-start w-full md:p-0 md:px-4 md:border-0 md:w-auto md:hidden md:invisible font-semibold text-amber-500"
+        class="p-4 border-b border-astryx-border-subtle text-start w-full md:p-0 md:px-4 md:border-0 md:w-auto md:hidden md:invisible font-semibold text-amber-500"
         @click="$emit('update:active', false)"
       >
         ✕ Fechar Menu
@@ -28,7 +33,7 @@
     </nav>
 
     <div
-      class="aspect-video order-1 bg-slate-900 flex flex-wrap drop-shadow place-content-center w-full md:hidden md:invisible p-4"
+      class="aspect-video order-1 bg-astryx-surface flex flex-wrap drop-shadow place-content-center w-full md:hidden md:invisible p-4 border-b border-astryx-border-subtle"
       role="button"
       aria-label="Voltar para a página anterior"
       @click="$emit('update:active', false)"
@@ -36,7 +41,7 @@
       <PsrLogo />
     </div>
 
-    <p class="text-gray-400 text-xs my-4 order-2 md:hidden md:invisible">Menu de Navegação</p>
+    <p class="text-astryx-text-tertiary text-xs my-4 order-2 md:hidden md:invisible">Menu de Navegação</p>
   </div>
 </template>
 
@@ -44,7 +49,7 @@
   .wrapper {
     @apply flex
   items-center
-  bg-white
+  bg-astryx-surface
   z-40
   fixed
   h-screen
@@ -62,6 +67,6 @@
   md:translate-x-0;
   }
   .menu-item {
-    @apply p-3 text-sm font-bold text-slate-700 hover:text-amber-500 transition-colors border-b border-slate-100 w-full md:p-2 md:px-3 md:border-0 md:w-auto rounded-xl hover:bg-amber-500/10;
+    @apply p-3 text-sm font-bold text-astryx-text-primary hover:text-amber-500 transition-colors border-b border-astryx-border-subtle w-full md:p-2 md:px-3 md:border-0 md:w-auto rounded-xl hover:bg-amber-500/10;
   }
 </style>

@@ -94,7 +94,7 @@
     <div class="bg-astryx-muted/80 p-4 rounded-astryx-container border border-astryx-border-subtle flex flex-col sm:flex-row items-center justify-between gap-4">
       <div class="flex items-center gap-2 w-full sm:w-auto justify-center">
         <button
-          class="w-12 h-12 rounded-astryx-element bg-astryx-surface hover:bg-white/10 text-white font-black text-xl flex items-center justify-center transition-all duration-[var(--astryx-duration-fast)] ease-[var(--astryx-ease-standard)] active:scale-90 shadow-astryx-low border border-astryx-border-subtle"
+          class="w-12 h-12 rounded-astryx-element bg-astryx-surface hover:bg-astryx-card-hover text-astryx-text-primary font-black text-xl flex items-center justify-center transition-all duration-[var(--astryx-duration-fast)] ease-[var(--astryx-ease-standard)] active:scale-90 shadow-astryx-low border border-astryx-border-subtle cursor-pointer"
           data-testid="decrement"
           @click="dec(1)"
         >
@@ -104,13 +104,13 @@
         <input
           v-model="countModel"
           type="number"
-          class="bg-astryx-body border border-astryx-border text-astryx-text-primary font-black text-xl rounded-astryx-element text-center w-28 h-12 shadow-inner focus:border-amber-400 focus:outline-none"
+          class="bg-astryx-body border border-astryx-border text-astryx-text-primary font-black text-xl rounded-astryx-element text-center w-28 h-12 shadow-inner focus:border-amber-500 focus:outline-none"
           data-testid="quantity"
           :aria-label="`Escolha quantas cotas você quer comprar. Mínimo: ${buyMin}. Máximo: ${buyMax}`"
         />
 
         <button
-          class="w-12 h-12 rounded-astryx-element bg-astryx-surface hover:bg-white/10 text-white font-black text-xl flex items-center justify-center transition-all duration-[var(--astryx-duration-fast)] ease-[var(--astryx-ease-standard)] active:scale-90 shadow-astryx-low border border-astryx-border-subtle"
+          class="w-12 h-12 rounded-astryx-element bg-astryx-surface hover:bg-astryx-card-hover text-astryx-text-primary font-black text-xl flex items-center justify-center transition-all duration-[var(--astryx-duration-fast)] ease-[var(--astryx-ease-standard)] active:scale-90 shadow-astryx-low border border-astryx-border-subtle cursor-pointer"
           data-testid="increment"
           @click="inc(1)"
         >
@@ -120,14 +120,14 @@
 
       <!-- Resumo do Preço -->
       <div class="text-center sm:text-end w-full sm:w-auto">
-        <p class="text-xl sm:text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-yellow-300 tracking-tight" data-testid="price-total">Valor total: {{ priceTotal }}</p>
+        <p class="text-xl sm:text-2xl font-black text-amber-600 dark:text-amber-400 tracking-tight" data-testid="price-total">Valor total: {{ priceTotal }}</p>
       </div>
     </div>
 
     <!-- Alerta de Escassez / FOMO -->
     <div class="bg-amber-500/10 border border-amber-500/30 rounded-astryx-container p-3 flex items-center gap-3">
       <span class="text-xl flex-shrink-0 animate-bounce">⚡</span>
-      <p class="text-xs text-amber-200">
+      <p class="text-xs text-amber-700 dark:text-amber-200">
         <strong>Atenção:</strong> As cotas são limitadas e reservadas apenas após a confirmação do Pix. Não perca a chance!
       </p>
     </div>
