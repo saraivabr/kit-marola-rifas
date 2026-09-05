@@ -1,0 +1,27 @@
+@import "./transitions/fade.css";
+@import "./astryx.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+svg, svg * {
+    color: currentColor;
+    fill: currentColor;
+}
+
+body {
+    background-color: var(--astryx-color-background-body);
+    color: var(--astryx-color-text-primary);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+}
+
+.container {
+    margin: 0 auto;
+}
+

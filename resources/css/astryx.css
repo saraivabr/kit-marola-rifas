@@ -1,0 +1,119 @@
+/**
+ * Astryx Design System Tokens (Meta Platforms, Inc.)
+ * Based on @astryxdesign/core and @astryxdesign/theme-neutral
+ * https://github.com/facebook/astryx
+ */
+
+:root {
+  /* =========================================================================
+   * 1. Radius Tokens (Numeric scale based on 4dp unit)
+   * ========================================================================= */
+  --astryx-radius-none: 0px;
+  --astryx-radius-inner: 4px;
+  --astryx-radius-element: 8px;
+  --astryx-radius-container: 12px;
+  --astryx-radius-card: 16px;
+  --astryx-radius-modal: 20px;
+  --astryx-radius-page: 28px;
+  --astryx-radius-full: 9999px;
+
+  /* =========================================================================
+   * 2. Size / Height Tokens for Controls (Consistent heights across controls)
+   * ========================================================================= */
+  --astryx-size-element-sm: 28px;
+  --astryx-size-element-md: 36px;
+  --astryx-size-element-lg: 44px;
+
+  /* =========================================================================
+   * 3. Border Tokens
+   * ========================================================================= */
+  --astryx-border-width: 1px;
+  --astryx-border-subtle: rgba(255, 255, 255, 0.08);
+  --astryx-border-default: rgba(255, 255, 255, 0.14);
+  --astryx-border-strong: rgba(255, 255, 255, 0.24);
+
+  /* =========================================================================
+   * 4. Focus Tokens (Shared keyboard focus ring)
+   * ========================================================================= */
+  --astryx-focus-outline-width: 2px;
+  --astryx-focus-outline-style: solid;
+  --astryx-focus-outline-color: var(--astryx-color-accent);
+  --astryx-focus-outline-offset: 2px;
+
+  /* =========================================================================
+   * 5. Elevation & Shadow Tokens (Ambient + Key light elevation system)
+   * ========================================================================= */
+  --astryx-shadow-low: 0px 1px 2px rgba(0, 0, 0, 0.4), 0px 2px 6px rgba(0, 0, 0, 0.25);
+  --astryx-shadow-med: 0px 2px 4px rgba(0, 0, 0, 0.45), 0px 6px 16px rgba(0, 0, 0, 0.35);
+  --astryx-shadow-high: 0px 4px 8px rgba(0, 0, 0, 0.5), 0px 12px 32px rgba(0, 0, 0, 0.5);
+
+  /* Astryx Inset Rings for states */
+  --astryx-shadow-inset-hover: inset 0px 0px 0px 1px rgba(255, 255, 255, 0.15);
+  --astryx-shadow-inset-selected: inset 0px 0px 0px 2px #f59e0b;
+  --astryx-shadow-inset-success: inset 0px 0px 0px 1px rgba(34, 197, 94, 0.4);
+  --astryx-shadow-inset-warning: inset 0px 0px 0px 1px rgba(245, 158, 11, 0.4);
+  --astryx-shadow-inset-error: inset 0px 0px 0px 1px rgba(239, 68, 68, 0.4);
+
+  /* =========================================================================
+   * 6. Motion & Easing Tokens (Meta Astryx curves & timings)
+   * ========================================================================= */
+  --astryx-duration-fast-min: 95ms;
+  --astryx-duration-fast: 125ms;
+  --astryx-duration-fast-max: 165ms;
+  --astryx-duration-medium-min: 225ms;
+  --astryx-duration-medium: 300ms;
+  --astryx-duration-medium-max: 400ms;
+  --astryx-duration-slow: 700ms;
+
+  --astryx-ease-standard: cubic-bezier(0.24, 1, 0.4, 1);
+  --astryx-ease-emphasized: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* =========================================================================
+   * 7. Surfaces & Backgrounds (Dark Mode Astryx Spine)
+   * ========================================================================= */
+  --astryx-color-background-body: #090a0f;
+  --astryx-color-background-surface: #12151e;
+  --astryx-color-background-card: #151824;
+  --astryx-color-background-card-hover: #1b1f2e;
+  --astryx-color-background-popover: #181c28;
+  --astryx-color-background-muted: #0d0f17;
+
+  /* =========================================================================
+   * 8. Text & Hierarchy Tokens
+   * ========================================================================= */
+  --astryx-color-text-primary: #f8fafc;
+  --astryx-color-text-secondary: #94a3b8;
+  --astryx-color-text-tertiary: #64748b;
+  --astryx-color-text-disabled: #475569;
+
+  /* =========================================================================
+   * 9. Brand & Functional Accent (Gold/Amber tabacaria + Meta Astryx precision)
+   * ========================================================================= */
+  --astryx-color-accent: #f59e0b;
+  --astryx-color-accent-hover: #fbbf24;
+  --astryx-color-accent-active: #d97706;
+  --astryx-color-accent-contrast: #090a0f;
+
+  /* Status Tokens */
+  --astryx-color-status-success: #22c55e;
+  --astryx-color-status-success-bg: rgba(34, 197, 94, 0.12);
+  --astryx-color-status-warning: #f59e0b;
+  --astryx-color-status-warning-bg: rgba(245, 158, 11, 0.12);
+  --astryx-color-status-error: #ef4444;
+  --astryx-color-status-error-bg: rgba(239, 68, 68, 0.12);
+  --astryx-color-status-info: #38bdf8;
+  --astryx-color-status-info-bg: rgba(56, 189, 248, 0.12);
+}
+
+/* Astryx focus-visible standard utility */
+.astryx-focus-ring:focus-visible {
+  outline: var(--astryx-focus-outline-width) var(--astryx-focus-outline-style) var(--astryx-focus-outline-color);
+  outline-offset: var(--astryx-focus-outline-offset);
+}
+
+/* Astryx smooth surface transition utility */
+.astryx-transition {
+  transition-property: color, background-color, border-color, box-shadow, transform, opacity;
+  transition-timing-function: var(--astryx-ease-standard);
+  transition-duration: var(--astryx-duration-fast);
+}

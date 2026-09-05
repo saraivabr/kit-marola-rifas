@@ -1,0 +1,100 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreOrderRequest;
+use App\Models\Order;
+use App\Models\Rifa;
+use Carbon\Carbon;
+use Inertia\Inertia;
+
+class OrderController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     */
+    public function index()
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $result = Order::with([
+            'rifa' => fn ($query) => $query->select('id', 'title', 'price', 'slug'),
+            'payment' => fn ($query) => $query->select('id', 'order_id'),
+        ])
+            ->where('id', $id)
+            ->first();
+
+        if ($result === null) {
+            return redirect('/');
+        }
+
+        if (now() > Carbon::parse($result->expire_at)) {
+            return redirect(route('rifas.show', ['rifa' => $result->rifa]));
+        }
+
+        if ($result->payment) {
+            return redirect(route('payment.show', ['payment' => $result->payment]));
+        }
+
+        $rifa = $result->rifa;
+
+        $order = $result->makeHidden('rifa');
+        $qty = $order->quantity ?: (is_array($order->numbers_reserved) && count($order->numbers_reserved) ? count($order->numbers_reserved) : 1);
+        $order->transaction_amount = $rifa->price * $qty;
+        $order->expire_at = Carbon::parse($order->expire_at);
+
+        return inertia('Order/PsrResume', [
+            'order' => $order,
+            'rifa' => $rifa,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(StoreOrderRequest $request)
+    {
+        $rifaId = $request->input('rifa');
+        $rifa = Rifa::findOrFail($rifaId);
+
+        $quantity = (int) $request->input('quantity');
+
+        // Verifica quantidade de bilhetes já vendidos (apenas pedidos pagos contam como indisponíveis)
+        $paidOrders = Order::select('numbers_reserved')
+            ->where('rifa_id', $rifa->id)
+            ->where('status', Order::STATUS_PAID)
+            ->get();
+
+        $takenCount = $paidOrders->pluck('numbers_reserved')
+            ->filter()
+            ->flatten()
+            ->count();
+
+        $availableCount = $rifa->total_numbers_available - $takenCount;
+
+        if ($availableCount < $quantity) {
+            return abort(409, 'Quantidade de cotas indisponível.');
+        }
+
+        // Não gera números antes do pagamento; os números serão alocados aleatoriamente após a confirmação do Pix
+        $order = new Order;
+        $order->customer_fullname = $request->input('fullname');
+        $order->customer_email = $request->input('email');
+        $order->customer_telephone = $request->input('telephone');
+        $order->customer_instagram = $request->input('instagram');
+        $order->rifa_id = $rifa->id;
+        $order->quantity = $quantity;
+        $order->numbers_reserved = [];
+        $order->status = Order::STATUS_RESERVED;
+        $order->expire_at = now()->addMinutes(config('payment.order_expired'));
+        $order->saveOrFail();
+
+        return Inertia::location(route('orders.show', [$order->id]));
+    }
+}
