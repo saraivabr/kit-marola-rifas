@@ -1,17 +1,22 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Compara snapshot > Testa mudança no html 1`] = `
-"<div class="border border-astryx-border-subtle bg-astryx-card p-4 sm:p-6 rounded-astryx-card shadow-astryx-low transition-all duration-[var(--astryx-duration-fast)] ease-[var(--astryx-ease-standard)] space-y-4 text-astryx-text-primary">
-  <p class="uppercase text-center font-bold font-[Raleway] text-xs sm:text-sm tracking-wider text-amber-400"> Ranking dos compradores </p>
-  <div class="flex flex-wrap justify-around gap-4 mx-auto sm:max-w-xl text-center">
-    <div class="flex-initial w-full sm:flex-auto sm:w-auto" data-test="ranking-user"><span class="text-[32px]">🥇</span>
-      <p class="text-sm mt-3">Valdeir Sant'Anna<br><b>1000</b> bilhetes </p>
+"<div class="border border-astryx-border-subtle bg-astryx-card p-4 sm:p-6 rounded-astryx-card shadow-astryx-low transition-all duration-[var(--astryx-duration-fast)] ease-[var(--astryx-ease-standard)] space-y-4 text-astryx-text-primary border-2 border-amber-500/30">
+  <p class="uppercase text-center font-bold font-[Raleway] text-xs sm:text-sm tracking-wider text-amber-400">
+  <div class="flex items-center justify-center gap-2"><span>🏆</span><span>Ranking dos Maiores Compradores</span></div>
+  </p>
+  <div class="flex flex-wrap justify-around gap-4 mx-auto sm:max-w-xl text-center pt-2">
+    <div class="flex-initial w-full sm:flex-auto sm:w-auto p-4 bg-amber-500/10 rounded-2xl border border-amber-500/30 shadow-md" data-test="ranking-user"><span class="text-[36px] block transform hover:scale-110 transition-transform">🥇</span><span class="inline-block text-[10px] font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded-full mt-1">Tubarão da Rifa</span>
+      <p class="text-sm font-black text-astryx-text-primary mt-2">Valdeir Sant'Anna</p>
+      <p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold mt-0.5"><strong>1000</strong> bilhetes adquiridos </p>
     </div>
-    <div class="flex-none sm:flex-auto" data-test="ranking-user"><span class="text-[32px]">🥈</span>
-      <p class="text-sm mt-3">Valdeir PSR<br><b>500</b> bilhetes </p>
+    <div class="flex-none sm:flex-auto p-3 bg-astryx-surface rounded-xl border border-astryx-border-subtle" data-test="ranking-user"><span class="text-[36px] block transform hover:scale-110 transition-transform">🥈</span><span class="inline-block text-[10px] font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded-full mt-1">Mestre das Cotas</span>
+      <p class="text-sm font-black text-astryx-text-primary mt-2">Valdeir PSR</p>
+      <p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold mt-0.5"><strong>500</strong> bilhetes adquiridos </p>
     </div>
-    <div class="flex-none sm:flex-auto" data-test="ranking-user"><span class="text-[32px]">🥉</span>
-      <p class="text-sm mt-3">Valdeir<br><b>1</b> bilhetes </p>
+    <div class="flex-none sm:flex-auto p-3 bg-astryx-surface rounded-xl border border-astryx-border-subtle" data-test="ranking-user"><span class="text-[36px] block transform hover:scale-110 transition-transform">🥉</span><span class="inline-block text-[10px] font-black uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-500/20 px-2 py-0.5 rounded-full mt-1">Comprador VIP</span>
+      <p class="text-sm font-black text-astryx-text-primary mt-2">Valdeir</p>
+      <p class="text-xs text-emerald-600 dark:text-emerald-400 font-bold mt-0.5"><strong>1</strong> bilhetes adquiridos </p>
     </div>
   </div>
 </div>"

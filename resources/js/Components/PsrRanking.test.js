@@ -29,7 +29,7 @@ describe('Teste de renderização do componente', () => {
 
     const users = wrapper.findAll('[data-test="ranking-user"]');
     expect(users.length).toEqual(3);
-    expect(users[0].text()).toEqual("🥇Valdeir Sant'Anna1000 bilhetes");
+    expect(users[0].text()).toEqual("🥇Tubarão da RifaValdeir Sant'Anna1000 bilhetes adquiridos");
   });
 });
 

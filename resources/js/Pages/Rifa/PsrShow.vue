@@ -98,17 +98,25 @@
     </div>
 
     <!-- Imagem da Rifa com Moldura e Badge -->
-    <div class="relative rounded-astryx-card overflow-hidden shadow-astryx-med border border-astryx-border-subtle bg-astryx-surface">
+    <div class="relative rounded-astryx-card overflow-hidden shadow-astryx-high border border-astryx-border-subtle bg-astryx-surface">
       <picture>
         <source media="(max-width: 425px)" :srcset="`${rifa.thumbnail}?width=425`" />
         <source media="(max-width: 768px)" :srcset="`${rifa.thumbnail}?width=768`" />
         <source media="(max-width: 1024px)" :srcset="`${rifa.thumbnail}?width=1024`" />
         <img :src="rifa.thumbnail" :alt="rifa.title" class="w-full max-h-[500px] object-cover object-center" />
       </picture>
-      <div class="absolute bottom-4 right-4 bg-astryx-body/90 backdrop-blur-md border border-amber-500/40 text-white px-4 py-2 rounded-astryx-container shadow-astryx-high flex items-center gap-2">
-        <span class="text-xs text-astryx-text-secondary">Por apenas</span>
-        <span class="text-lg font-black text-amber-400">{{ price }}</span>
-        <span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-1.5 py-0.5 rounded">a cota</span>
+
+      <!-- Sexy Canvas: Liberdade de Escolha da Criança Interior -->
+      <div class="absolute top-4 left-4 flex flex-col gap-2 z-10">
+        <span class="bg-black/80 backdrop-blur-md text-emerald-400 border border-emerald-500/40 text-xs font-black px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5">
+          <span>🎁</span> O Ganhador escolhe: Kit Físico ou Pix na Conta!
+        </span>
+      </div>
+
+      <div class="absolute bottom-4 right-4 bg-black/85 backdrop-blur-md border border-amber-500/40 text-white px-4 py-2 rounded-astryx-container shadow-astryx-high flex items-center gap-2">
+        <span class="text-xs text-slate-300">Por apenas</span>
+        <span class="text-xl font-black text-amber-400">{{ price }}</span>
+        <span class="text-[10px] text-emerald-400 font-bold bg-emerald-500/20 px-2 py-0.5 rounded">a cota</span>
       </div>
     </div>
 
