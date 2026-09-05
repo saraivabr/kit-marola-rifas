@@ -208,7 +208,7 @@
   </div>
 
   <!-- Sticky Bottom CTA Flutuante (Apenas Mobile) -->
-  <div v-if="!isFinished" class="md:hidden fixed bottom-14 left-0 right-0 z-30 p-3 bg-gradient-to-t from-zinc-950 via-zinc-950/95 to-transparent pointer-events-none">
+  <div v-if="!isFinished" class="md:hidden fixed bottom-14 left-0 right-0 z-30 p-3 bg-gradient-to-t from-astryx-body via-astryx-body/95 to-transparent pointer-events-none">
     <button
       type="button"
       @click="onReserveNumbers"

@@ -146,7 +146,7 @@
         </a>
 
         <!-- Botão de Tema no Header para Acesso Imediato -->
-        <div class="flex items-center gap-2 md:hidden">
+        <div class="flex items-center gap-2">
           <PsrThemeToggle />
         </div>
       </div>

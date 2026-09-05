@@ -104,14 +104,14 @@ function closeModal() {
         <!-- Bottom Sheet Dialog -->
         <div class="relative w-full sm:max-w-md bg-astryx-surface border border-astryx-border-subtle rounded-t-astryx-page sm:rounded-astryx-modal p-5 shadow-astryx-high z-10 max-h-[85vh] overflow-y-auto">
           <!-- Puxador Mobile -->
-          <div class="w-12 h-1.5 bg-slate-700 rounded-full mx-auto mb-4 sm:hidden"></div>
+          <div class="w-12 h-1.5 bg-astryx-border-strong rounded-full mx-auto mb-4 sm:hidden"></div>
 
           <div class="flex items-center justify-between mb-4">
             <h3 class="text-base font-bold text-astryx-text-primary flex items-center gap-2">
               <span>🎟️</span>
               <span>Consultar Meus Números</span>
             </h3>
-            <button @click="closeModal" class="text-astryx-text-secondary hover:text-white p-1 rounded-full bg-white/5">
+            <button @click="closeModal" class="text-astryx-text-secondary hover:text-astryx-text-primary p-1 rounded-full bg-astryx-muted">
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
               </svg>

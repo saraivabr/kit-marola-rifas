@@ -12,8 +12,12 @@ function applyTheme(theme: 'light' | 'dark') {
   if (typeof document !== 'undefined') {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', '#090a0f');
     } else {
       document.documentElement.classList.remove('dark');
+      const meta = document.querySelector('meta[name="theme-color"]');
+      if (meta) meta.setAttribute('content', '#f8fafc');
     }
   }
 }
@@ -21,28 +25,16 @@ function applyTheme(theme: 'light' | 'dark') {
 export function useTheme() {
   if (typeof window !== 'undefined' && !isInitialized) {
     isInitialized = true;
-    const stored = (typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null) as ThemeMode || 'auto';
-    themeMode.value = stored;
-
-    const mediaQuery = typeof window.matchMedia === 'function' ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+    const stored = (typeof localStorage !== 'undefined' ? localStorage.getItem('theme') : null) as ThemeMode | null;
     
-    function update() {
-      if (themeMode.value === 'auto') {
-        applyTheme(mediaQuery?.matches ? 'dark' : 'light');
-      } else {
-        applyTheme(themeMode.value === 'dark' ? 'dark' : 'light');
-      }
+    // Padrão do site é 'light' (claro e limpo) a menos que o usuário tenha escolhido 'dark'
+    if (stored === 'dark') {
+      themeMode.value = 'dark';
+      applyTheme('dark');
+    } else {
+      themeMode.value = 'light';
+      applyTheme('light');
     }
-
-    if (mediaQuery && typeof mediaQuery.addEventListener === 'function') {
-      mediaQuery.addEventListener('change', () => {
-        if (themeMode.value === 'auto') {
-          update();
-        }
-      });
-    }
-
-    update();
   }
 
   function setTheme(mode: ThemeMode) {
