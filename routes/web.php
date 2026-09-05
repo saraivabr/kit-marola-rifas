@@ -46,6 +46,9 @@ Route::get('/rifas-finalizadas', [App\Http\Controllers\RifasController::class, '
 
 Route::get('/depoimentos', [App\Http\Controllers\TestimonialController::class, 'index'])->name('testimonials.list');
 
+Route::get('/customers/lookup', [\App\Http\Controllers\CustomerController::class, 'lookup'])->name('customers.lookup');
+
 Route::get('/contato', [App\Http\Controllers\ContactController::class, 'index'])->name('contact');
 
 Route::post('/contato', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.post');
+
